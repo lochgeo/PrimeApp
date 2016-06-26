@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     function calcPrime() {
         var n, i, j, k, ms1, ms2, lookBack, lastPrime;
-        var notPrime = {
+        var isPrime = {
             0: false,
             1: false
         };
@@ -22,7 +22,7 @@ $(document).ready(function() {
         k = (k < 4) ? 4 : k;
 
         for (i = k; i <= n; i += 2)
-            notPrime[i] = false;
+            isPrime[i] = false;
 
         for (i = 3; i <= Math.sqrt(n); i += 2) {
             k = Math.floor((n - lookBack) / i);
@@ -30,17 +30,17 @@ $(document).ready(function() {
             if (i > 8) {
                 if (i % 3 != 0 && i % 5 != 0 && i % 7 != 0) {
                     for (j = i * k; j <= n; j += i)
-                        notPrime[j] = false;
+                        isPrime[j] = false;
                 }
             } else {
                 for (j = i * k; j <= n; j += i)
-                    notPrime[j] = false;
+                    isPrime[j] = false;
             }
         }
 
         lastPrime = -1;
         for (i = n - lookBack; i <= n; i++) {
-            if (!(i in notPrime)) {
+            if (!(i in isPrime)) {
                 if (i - lastPrime == 2) {
                     $("#results").append(lastPrime + ", " + i + "<br>");
                 }
